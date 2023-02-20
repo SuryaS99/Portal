@@ -173,17 +173,18 @@ namespace JobPortal.Service
             try
             {
                 var _user = await _userRepository.GetById(entity.Id);
+              //  var _user = new User();
+                _user.Name = entity.Name;
+                _user.Email = entity.Email;
+                _user.Password = entity.Password;
+                _user.RoleId = 2;
+                _user.IsActive = entity.IsActive;
                 if (_user != null)
                 {
-                    _user.Name = entity.Name;
-                    _user.Email = entity.Email;
-                    _user.Password = entity.Password;
-                    _user.RoleId =2;
-                    _user.IsActive = entity.IsActive;
-                    _userRepository.Update(_user);
-                    return _user;
+                    _userRepository.Update(entity);
                 }
                 return _user;
+               
             }
             catch (Exception ex)
             {

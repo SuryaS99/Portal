@@ -17,8 +17,18 @@ namespace JobPortal.Database.Repo
         public async Task<IEnumerable<User>> GetCandidates(PagedParameters pagedParameters)
         {
             var candidates = await (from u in JobDbContext.User
-                              where u.RoleId == 1
-                              select u)
+                                    join r in JobDbContext.Role on u.RoleId equals r.Id
+                                    where u.RoleId ==2
+                                    select new User
+                                    {
+                                        Id = u.Id,
+                                        Name = u.Name,
+                                        Email = u.Email,
+                                        Password = u.Password,
+                                        RoleId = 2,
+                                        CreatedAt = u.CreatedAt,
+                                        IsActive = u.IsActive
+                                    })
                               .Skip((pagedParameters.PageNumber - 1) * pagedParameters.PageSize)
                               .Take(pagedParameters.PageSize)
                               .ToListAsync();
@@ -45,8 +55,18 @@ namespace JobPortal.Database.Repo
         public async Task<IEnumerable<User>> GetRecruiters(PagedParameters pagedParameters)
         {
             var recruiters = await (from u in JobDbContext.User
-                              where u.RoleId == 2
-                              select u)
+                                    join r in JobDbContext.Role on u.RoleId equals r.Id
+                                    where u.RoleId == 3
+                                    select new User
+                              {
+                                    Id=u.Id,
+                                    Name=u.Name,
+                                    Email=u.Email,
+                                    Password=u.Password,
+                                    RoleId=3,
+                                    CreatedAt=u.CreatedAt,
+                                    IsActive=u.IsActive
+                              })
                               .Skip((pagedParameters.PageNumber - 1) * pagedParameters.PageSize)
                               .Take(pagedParameters.PageSize)
                               .ToListAsync();
@@ -55,8 +75,19 @@ namespace JobPortal.Database.Repo
 
         public async Task<IEnumerable<User>> GetUsers(PagedParameters pagedParameters)
         {
-            var users = await (from u in JobDbContext.User
-                         select u)
+             var users = await (from u in JobDbContext.User
+                               join r in JobDbContext.Role on u.RoleId equals r.Id
+                                    
+                                    select new User
+                                    {
+                                        Id = u.Id,
+                                        Name = u.Name,
+                                        Email = u.Email,
+                                        Password = u.Password,
+                                        RoleId = r.Id,
+                                        CreatedAt = u.CreatedAt,
+                                        IsActive = u.IsActive
+                                    })
                          .Skip((pagedParameters.PageNumber - 1) * pagedParameters.PageSize)
                          .Take(pagedParameters.PageSize)
                          .ToListAsync();
