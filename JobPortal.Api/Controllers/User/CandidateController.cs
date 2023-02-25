@@ -33,7 +33,7 @@ namespace JobPortal.Api.Controllers
         }
 
         [HttpPut] 
-        [Route("{id}")]
+        [Route("rty")]
         public async Task<IActionResult> Update(User user)
         {
             if (ModelState.IsValid)

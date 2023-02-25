@@ -50,8 +50,8 @@ namespace JobPortal.Api
             services.AddOptions();
             services.AddMemoryCache();
 
-            services.Configure<IpRateLimitOptions>(Configuration.GetSection("IpRateLimiting"));
-            services.Configure<IpRateLimitPolicies>(Configuration.GetSection("IpRateLimitPolicies"));
+            //services.Configure<IpRateLimitOptions>(Configuration.GetSection("IpRateLimiting"));
+            //services.Configure<IpRateLimitPolicies>(Configuration.GetSection("IpRateLimitPolicies"));
 
             //services.Configure<ClientRateLimitOptions>(Configuration.GetSection("ClientRateLimiting"));
             //services.Configure<ClientRateLimitPolicies>(Configuration.GetSection("ClientLimitPolicies"));

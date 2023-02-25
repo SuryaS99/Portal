@@ -22,20 +22,20 @@ namespace JobPortal.Api.Controllers
         }
 
         [HttpPost]
-        [Authorize(Policy = "Admin")]
+        //[Authorize(Policy = "Admin")]
         public async Task<IActionResult> Add(Role role)
         {
             if (ModelState.IsValid)
             {
-                    var result = await _roleService.Add(role);
-                    return Ok(new Response { Code = StatusCodes.Status200OK, Message = "Role successfully created...", Data = result });
-           }
+                var result = await _roleService.Add(role);
+                return Ok(new Response { Code = StatusCodes.Status200OK, Message = "Role successfully created...", Data = result });
+            }
             return BadRequest(ModelState);
         }
 
         [HttpGet]
         [Route("Roles")]
-        [Authorize(Policy = "Admin")]
+        //[Authorize(Policy = "Admin")]
         public async Task<IActionResult> Get([FromQuery] PagedParameters pagedParameters)
         {
             var data = await _roleService.GetRoles(pagedParameters);
@@ -44,7 +44,7 @@ namespace JobPortal.Api.Controllers
 
         [HttpGet]
         [Route("{id}")]
-        [Authorize(Policy = "Admin")]
+        //[Authorize(Policy = "Admin")]
         public async Task<IActionResult> GetById(int id)
         {
             var result = await _roleService.GetRoleById(id);
@@ -52,8 +52,8 @@ namespace JobPortal.Api.Controllers
         }
 
         [HttpPut]
-        [Route("{id}")]
-        [Authorize(Policy = "Admin")]
+        [Route("role1")]
+        //[Authorize(Policy = "Admin")]
         public async Task<IActionResult> Update(Role role)
         {
             if (ModelState.IsValid)
@@ -68,7 +68,7 @@ namespace JobPortal.Api.Controllers
 
         [HttpDelete]
         [Route("{id}")]
-        [Authorize(Policy = "Admin")]
+        //[Authorize(Policy = "Admin")]
         public async Task<IActionResult> Delete(int id)
         {
             var result = await _roleService.Delete(id);
